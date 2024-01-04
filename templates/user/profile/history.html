@@ -1,0 +1,43 @@
+{% extends "user/profile.html" %}
+
+{% block settings %}
+
+<div class=profile-settings>
+
+	<h6>Check your payment history</h6>
+
+	<table>
+		<thead>
+		<tr>
+			<th>Date</th>
+			<th>Description</th>
+			<th>Amount</th>
+			<th>Status</th>
+		</tr>
+		</thead>
+		<tbody>
+
+			{% if data is defined and data[0] is defined %}
+				{% for d in data %}
+					<tr>
+						<td>{{ d[0]  }}</td>
+						<td>{{ d[1] }}</td>
+						<td>{{ d[2] }}</td>
+						<td><div class="paid">{{ d[3] }}</div></td>
+					</tr>
+				{% endfor %}
+			{% else %}
+				<tr>
+					<td>None</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			{% endif %}
+
+		</tbody>						
+	</table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "user/profile.html" %}
+
+{% block settings %}
+
+<div class=profile-settings>
+
+	<h6>Manage your API keys</h6>
+
+	{% if onekey is defined %}
+	<div class="key-message">
+
+		<p>A new API key has been created. <strong>This key will only be displayed once.</strong></p> 
+		<div class="key-key over"><p> {{ onekey }} </p></div>
+		<p>Please store this key somewhere secure. You will not be able to retrieve
+		this key once message closes.</p>
+	
+	</div>
+	{% endif %}
+
+	<table>
+		<thead>
+		<tr>
+			<th>Name</th>
+			<th>Key Prefix</th>
+			<th>Action</th>
+		</tr>
+		</thead>
+		<tbody>
+			{% if keylist is defined and keylist[0] is defined %}
+				{% for key in keylist %}
+					<tr>
+						<td>{{ key[1] }}</td>
+						<td>{{ key[2][:7] }}</td>
+						<td>
+							<form class="form-keys" action="{{ url_for('do_keydel', keydel=key[1]) }}" method="post">
+								<button class="nav-btn nav-btn-sign log-btn del-btn" type="submit">Delete</button>
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			{% else %}
+				<tr>
+					<td>None</td>
+					<td></td>
+					<td></td>
+				</tr>
+			{% endif %}
+		</tbody>						
+	</table>
+
+	<form class="form-keys" action="{{ url_for('do_keygen') }}" method="post">
+		
+		<label class="fk-label">Create a new key</label>
+		<input type="text" name="keyname" value="API Key {{ keylist|length + 1 }}">
+
+		<div class="form-keys-buttons">
+			<button class="nav-btn nav-btn-log log-btn" type="button">Cancel</button>
+			<button class="nav-btn nav-btn-sign log-btn cre-btn" type="submit">Create API Key</button>
+		</div>
+	</form>
+</div>
+
+{% endblock %}

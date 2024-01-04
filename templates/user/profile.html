@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block user %}
+
+<nav class="header-item nav">
+	<a href="{{ url_for('show_account') }}" role="link" aria-label="#" class="nav-btn nav-btn-log">View profile</a>
+	<form action="{{ url_for('do_logout') }}" method="post">
+		<button class="nav-btn nav-btn-sign">Log out</button>
+	</form>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+
+<main class="container-profile">
+	<div class="container-profile-layout">
+		
+		<div class="container-profile-head">
+			<svg viewbox="0 0 50 50" height="50" width="50" class="avatar">
+				<style>
+					.circle { fill: lightblue; }
+					.letter { font: bolder 1.75rem arial; fill: indianred;  }
+				</style>
+				<circle cx="25" cy="25" r="25" class="circle" />
+  			<text x="25" y="25" dominant-baseline="central" text-anchor="middle" class="letter">{{ user[0] }}</text>
+			</svg>
+			<h4 class=avatar-text>Welcome {{ user }}</h4>
+		</div>
+
+		<div class="container-profile-body">
+
+			<div class="flex-col">
+				<nav class="profile-nav">
+					<span class="profile-nav-btn profile-nav-label">Profile</span>
+					<a class="profile-nav-btn" href="{{ url_for('show_account') }}">Settings</a>
+					<a class="profile-nav-btn" href="{{ url_for('show_api_usage') }}">API Usage</a>
+					<a class="profile-nav-btn" href="{{ url_for('show_api_keys') }}">API Keys</a>
+					<a class="profile-nav-btn" href="{{ url_for('show_payment_plan') }}">Payment Plan</a>
+					<a class="profile-nav-btn" href="{{ url_for('show_payment_history') }}">Payment History</a>
+
+				</nav>
+			</div>
+			
+			{% block settings %} {% endblock %}
+
+		</div>
+	</div>
+</main>
+
+
+{% endblock %}
+

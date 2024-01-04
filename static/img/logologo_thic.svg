@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="31.8mm" height="28mm" version="1.1" viewBox="0 0 31.8 28" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(19.7 -45.3)">
+  <rect x="6.01" y="48.3" width="40" height="40" rx="5" ry="5" fill="#fff" opacity=".99" stroke-width="0"/>
+  <g transform="matrix(.919 0 0 .919 -27.7 -3.61)" stroke="#192e5b" stroke-linejoin="round">
+   <path transform="matrix(.267 0 0 .267 -14.5 -4.26)" d="m94.5 322 57.3-99.3 57.3 99.3h-57.3z" fill="#ce4e5c" opacity=".99" stroke-width="15"/>
+   <path transform="matrix(.223 0 0 .223 -28.3 19.8)" d="m232 277 39.8-68.9 39.8 68.9h-39.8z" fill="#ffb6c1" opacity=".99" stroke-width="17.9"/>
+  </g>
+ </g>
+</svg>

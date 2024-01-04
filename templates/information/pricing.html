@@ -1,0 +1,53 @@
+<div class=landing>
+
+
+	<h3 class="section-head" id="pricing">Pricing</h2>
+
+
+	<div class="payment-options">
+		<div class="payment-box">
+			<h4>Free</h4>
+			<p>Free trial for testing</p>
+			<ul>
+				<li>500 queries per month</li>
+				<li>1 query per second</li>
+				<li>Limited query length</li>
+			</ul>
+			<a class="nav-btn nav-btn-sign payment-btn" href="{{ url_for('show_payment_plan') }}">Select</a>
+		</div>
+		<div class="payment-box">
+			<h4>Basic (€35 / month)</h4>
+			<p>For hobbyists or light users looking to get started</p>
+			<ul>
+				<li>1500 queries per day</li>
+				<li>5 queries per second</li>
+			</ul>
+			<a class="nav-btn nav-btn-sign payment-btn" href="{{ url_for('show_payment_plan') }}">Select</a>
+		</div>
+	</div>
+	<div class="payment-options">
+		<div class="payment-box">
+			<h4>Pro (€70 / month)</h4>
+			<p>For professional users or small companies</p>
+			<ul>
+				<li>3600 queries per day</li>
+				<li>12 queries per second</li>
+				<li>Access to 5 meter or less resolution datasets</li>
+				<li>Priority support</li>
+			</ul>
+			<a class="nav-btn nav-btn-out payment-btn" href="#">Coming soon</a>
+		</div>
+		<div class="payment-box">
+			<h4>Enterprise (Custom / month)</h4>
+			<p>For medium to large companies with custom needs</p>
+			<ul>
+				<li>Custom query limits</li>
+				<li>Custom datasets</li>
+				<li>Custom processing</li>
+				<li>Enterprise priority support</li>
+			</ul>
+			<a class="nav-btn nav-btn-out payment-btn" href="#">Coming soon</a>
+		</div>
+	</div>
+	
+</div>

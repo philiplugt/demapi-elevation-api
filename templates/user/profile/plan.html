@@ -1,0 +1,67 @@
+{% extends "user/profile.html" %}
+
+{% block settings %}
+
+<div class=profile-settings>
+
+	<h6>Manage your payment plan</h6>
+
+	{% if message is defined %}
+		{{ message }}
+	{% endif %}
+
+	<div class="profile-billing-type">
+		{% if planType == "free" %}
+
+		<div class="profile-billing-option profile-billing-select">			
+			<h6>Demapi Free - €0 / month</h6>
+			<p>This is your current plan type</p>
+		</div>
+
+		<div class="profile-billing-option">
+			<h6>Demapi Basic - €35 / month</h6>
+			<form action="{{ url_for('do_checkout') }}" method="POST">
+				<input type="hidden" name="priceId" value="{{ priceBasic }}" />
+				<button class="nav-btn nav-btn-sign" button="submit">Upgrade to Basic</button>
+			</form>
+		</div>
+
+		{% elif planType == "basic" %}
+
+		<div class="profile-billing-option">			
+			<h6>Demapi Free - €0 / month</h6>
+			<form action="{{ url_for('show_cancel_plan') }}" method="POST">
+				<button class="nav-btn nav-btn-sign" button="submit">Downgrade to Free</button>
+			</form>
+		</div>
+
+		<div class="profile-billing-option profile-billing-select">
+			<h6>Demapi Basic - €35 / month</h6>
+			<p>This is your current plan type</p>
+		</div>
+
+		{% elif planType == "basic_cancel" %}
+
+		<div class="profile-billing-option">			
+			<h6>Demapi Free - €0 / month</h6>
+			<form action="{{ url_for('do_checkout') }}" method="POST">
+				<input type="hidden" name="priceId" value="{{ priceBasic }}" />
+				<button class="nav-btn nav-btn-sign" button="submit">Upgrade to Basic</button>
+				<p>* This will setup a new subscription before the previous one has ended</p>
+			</form>
+		</div>
+
+		<div class="profile-billing-option profile-billing-select">
+			<h6>Demapi Basic - €35 / month</h6>
+			<p>This is your current plan type. Your subscription has been cancelled. Your current plan will end on {{ cancel }}</p>
+		</div>
+
+		{% else %}
+
+		<p>An error occured, please contact admin</p>
+
+		{% endif %}
+	</div>
+</div>
+
+{% endblock %}

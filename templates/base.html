@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+
+		<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favi16.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favi32.png') }}">
+        <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="{{ url_for('static', filename='img/favi180.png') }}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='img/favi192.png') }}">
+
+
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/ownstyle.css') }}">
+		<!-- <link rel="stylesheet" href="../static/css/styles.css"> -->
+		
+		<title>Demapi – Elevation API</title>
+	</head>
+
+	<body>
+		<header class="" role="banner">
+			<div class="header-box container">
+				<!-- LOGO -->
+				<a class="logos" href="{{ url_for('index') }}" role="link">
+					<!-- <svg viewBox="0 0 24 24" height="24" width="24" role="img" aria-label="#">
+						<path fill="#353535" d="M0 0h4.5v9a4.5 4.5 0 109 0V6H18v3A9 9 0 110 9V0zm18 4.5V0h-4.5v4.5H18z"/>
+
+						<img class="logo" src="static/img/logo-text.svg" alt="Lugtaarde Consult">
+					<svg viewBox="0 0 173 28" height="28" width="173" role="img">
+						<style>
+							.heavy { font: bolder 28px menlo; fill: indianred; letter-spacing: 0.05rem;}
+						</style>
+						<text x="0" y="22" class="heavy">demapi</text>
+					</svg>
+					</svg> 
+					<img class="logologo" src="static/img/logologo_thic.svg" alt="demapi.com"> -->
+					<img class="logo" src="{{ url_for('static', filename='img/logo2.svg') }}" alt="demapi.com">
+				</a>
+
+				<!-- MENU -->
+				<nav class="header-item nav" role="navigation">
+					<a href="{{ url_for('show_docs') }}" role="link" aria-label="#" class="nav-btn">Documentation</a>
+					<a href="{{ url_for('index', _anchor='pricing') }}" role="link" aria-label="#" class="nav-btn">Pricing</a>
+					<a href="{{ url_for('index', _anchor='about') }}" role="link" aria-label="#" class="nav-btn">About</a>
+				</nav>
+
+				{% block user %} {% endblock %}
+			
+			</div>
+		</header>
+		
+		{% block content %} {% endblock %}
+	
+	</body>
+</html>

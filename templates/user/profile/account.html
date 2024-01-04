@@ -1,0 +1,25 @@
+{% extends "user/profile.html" %}
+
+{% block settings %}
+
+<div class=profile-settings>
+	<h6>Manage your profile</h6>
+
+	{% if message is defined %}
+	<div class="key-message">
+		<p>{{ message }}</p>
+	</div>
+	{% endif %}
+
+	<form class="form-change" action="{{ url_for('do_account_edit') }}" method="post">
+		<label>Name</label>
+		<input type="text" name="name" value="{{ user }}">
+
+		<label>Email</label>
+		<input type="email" name="email" value="{{ email }}">
+
+		<button class="nav-btn nav-btn-sign log-btn">Save</button>
+	</form>
+</div>
+
+{% endblock %}

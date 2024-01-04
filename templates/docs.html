@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+
+{% block user %}
+
+{% if not logged %}
+
+<nav class="header-item nav">
+	<a href="{{ url_for('show_login') }}" role="link" aria-label="#" class="nav-btn nav-btn-log">Log In</a>
+	<a href="{{ url_for('show_signup') }}" role="link" aria-label="#" class="nav-btn nav-btn-sign">Sign Up</a>
+</nav>
+
+{% else %}
+
+<nav class="header-item nav">
+	<a href="{{ url_for('show_account') }}" role="link" aria-label="#" class="nav-btn nav-btn-log">View profile</a>
+	<form action="{{ url_for('do_logout') }}" method="post">
+		<button class="nav-btn nav-btn-sign">Log out</button>
+	</form>
+</nav>
+
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="landing2">
+	<p>Demapi is a simple API for obtaining elevation at a given location. The API functions by giving the webbrowser or your application a URL from which the the API server will response with a JSON object containing an elevation in addition to other date.</p>
+	
+	<div class="section3">
+	<h3>API Endpoints</h3>
+
+	<table id="table2">
+		<thead>
+		<tr id="tr2">
+			<th>Endpoint</th>
+			<th>Purpose</th>
+			<th>Required</th>
+			<th>Optional</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr id="tr2">
+			<td class="endp">/api/v1/elevation/point</td>
+			<td>Get elevation at a single point</td>
+			<td><span class="query-param">key</span>,<span class="query-param">via</span></td>
+			<td><span class="query-param">crs</span>,<span class="query-param">dataset</span></td>
+		</tr>
+		<tr id="tr2">
+			<td class="endp">/api/v1/elevation/points</td>
+			<td>Get elevation as multiple points</td>
+			<td><span class="query-param">key</span>,<span class="query-param">via</span></td>
+			<td><span class="query-param">crs</span>,<span class="query-param">dataset</span></td>
+		</tr>
+		<tr id="tr2">
+			<td class="endp">/api/v1/sources</td>
+			<td>Get information about the available dataset at a single point</td>
+			<td><span class="query-param">key</span>,<span class="query-param">via</span></td>
+			<td><span class="query-param">none</span></td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="section3">
+	<h3>URL Formatting</h3>
+
+	<p>To use this API it is a prerequisite that your URLs are properly formatted. Demapi can make no guarantees on whether malformed query will successfully run. In fact, more often than not, malformed queries will fail.</p>
+
+	<p>The following characters are used when formatting: <span class="query-param">?</span>, <span class="query-param">&</span></p>
+
+	<p>To indicate to API that you are starting your query append the <span class="query-param">?</span> after endpoint. Add a a query parameter. Each additional parameter is append to the URL with <span class="query-param">&</span>.</p>
+
+	<p>A correctly formatted URL will look something like this:</p>
+
+	<p class="code-box code-text2 example">https://{domain}{endpoint}?{first_parameter}&{second_parameter}&...</p>
+
+	<p>Where the domain is replaced with <span class="query-param">demapi.com</span>, and endpoint is replaced with a given endpoint from the table above, as the <span class="query-param">/api/v1/elevation/point</span>. This will yield:</p>
+
+	<p class="code-box2 code-text2 example">https://demapi.com/api/v1/elevation/point?{first_parameter}&{second_parameter}&...</p>
+
+	<p>Next the parameters must be replaced.</p>
+
+</div>	
+
+<div class="section3">	
+	<h3>Query Parameters</h3>
+
+	<p>A query parameter is composed of two elements the parameter (or option) itself and a value. These are provided by the user to specify the actions to be taken by the API call. Correct formatting looks like:</p>
+
+	<p class="code-box code-text2 example">{option}={value}</p>
+
+	<p>Which is to say that options set to a value as per the user's preference. When an API call is made all options passed in the URL are checked. The server then processes the options' values to yield an appropriate response.</p>
+
+	<p>There are only several options per endpoint, wome are required, while others are optional.</p>
+
+</div>
+<div class="section3">
+	<h3>Available Query Parameters</h3>
+
+	<p><span class=query-param>key</span> &#8212; The key option, also referred to as the API key, is your unique identifier for accessing and using the API. Whenever making a query you must provide your key somewhere in the query URL.</p>
+
+	<p class="code-box code-text2 example">key={your_api_key}</p>
+
+	<p>When first creating your account, you must generate a key. A newly generated key looks something like: <span class=query-param>yTnaPMi.68tqUHHAqw68XJs2Lzapgxn2Ogubi52E</span> (note: this is non-function key for this example). The key is made up of 2 parts: a key identifier, which is the first 7 characters before the <span class=query-param>.</span> and the actual secret key, which is the 32 characters after the dot. When generating a key, the secret portion will only be displayed <b>once</b>. The identifier is visible at all times from your personal API keys page. It is used help you reconize previously created keys. Nevertheless, once a key has been created you must save your key to a secure place, accessible to you for when you wish to use the API. For security reasons, if you lose your key it cannot be retrieved and you must generate a new key to use.
+
+	<p class="new-para"><span class=query-param>via</span> &#8212; Via is the query tag used for providing the API with a location from which to retrieve an elevation.</p>
+
+
+	<p>Via is made up of an X and Y coordinate when using non-spherical coordinates (projected coordinates). And used a longitude and latitude coordinate when using spherical coordinates (such as GPS).</p>
+
+	<p>Any coordinate can be entered into the API, however, results will only be returned for coordinates for which data or datasets are available.</p>
+
+	<p>Each coordinate is separated by a comma <span class="query-param">,</span></p>
+
+	<p>The dot <span class="query-param">.</span> is used as standard for decimal denoted coordinates.</p>
+
+	<p>Endpoint <span class="query-param">/api/v1/elevation/point</span> accepts only 1 coordinate pair. While a endpoint <span class="query-param">/api/v1/elevation/point<b>s</b></span> accepts up to 500 points separated by the vertical line symbol <span class="query-param">|</span></p>
+
+	<p class="code-box2 code-text2 response example"><span class="code-color">/api/v1/elevation/point</span>
+	
+via={x},{y} <b>OR</b> via={lon},{lat}</p>
+
+	<p class="example">or</p>
+
+	<p class="code-box2 code-text2 response example"><span class="code-color">/api/v1/elevation/points</span>
+
+via={x},{y}|{x},{y}|... <b>OR</b> via={lon},{lat}|{lon},{lat}|...</p>
+
+
+	
+	<p class="new-para"><span class=query-param>crs</span> &#8212; CRS stands for coordinate reference system. Not all DEMs are the same, some use different coordinate systems. Demapi will try to smartly convert between CRSs. However it is often most accurate to use the native CRS of the DEM. For example, normal GPS coordinates are provided in a system called WGS84, while the DEM for a country like the Netherland is provided in a local coordinate system called “Rijksdriehoekstelsel” (RD). In that regard, may be necessary to specify the type of coordinates your are using in your query.</p>
+
+	<p>Demapi assumes the locations local coordinate system is used. In order to use GPS (WGS84) coordinates, this needs to be specified with the CRS tag as:</p>
+
+	<p class="code-box2 code-text2 example">crs=wgs84</p>
+
+	<p>This is done, because querying the dataset’s native coordinate system provides results closest to the original raw data. While using a non-native coordinate system requires conversion, which can cause small discrepancies in the final result.</p>
+</div>
+
+<div class="section3">
+	<h3>Example API Call - Sources</h3>
+
+<div class="code-box example">	
+<p class="code-text2 response"><span class="code-color">https://demapi.com/api/v1/sources?via=163934,368304&key=yTnaPMi.68tqUHHAqw68XJs2Lzapgxn2Ogubi52E</span>
+
+{
+  "results": [   
+    {
+      "ahn_dsm_5m": {
+        "name": "Actueel Hoogtebestand Nederland 3 (AHN3)", 
+        "description": "AHN3 digital surface model with a 5m resolution", 
+        "organization": "Rijkswaterstaat", 
+        "year": "2014-2019", 
+        "website": "https://www.ahn.nl/", 
+        "license": "CC-0", 
+        "datum": "Normaal Amsterdams Peil (NAP)", 
+        "resolution": 5
+      }
+    }, 
+    {
+      "ahn_dtm_5m": {
+        "name": "Actueel Hoogtebestand Nederland 3 (AHN3)", 
+        "description": "AHN3 digital terrain model with a 5m resolution", 
+        "organization": "Rijkswaterstaat", 
+        "year": "2014-2019", 
+        "website": "https://www.ahn.nl/", 
+        "license": "CC-0", 
+        "datum": "Normaal Amsterdams Peil (NAP)", 
+        "resolution": 5
+      }
+    }
+  ], 
+  "status": "OK"
+}</p>
+</div>
+</div>
+
+<div class="section3">
+	<h3>Example API Call - Points</h3>
+
+<div class="code-box example">
+<p class="code-text2 response"><span class="code-color">https://demapi.com/api/v1/elevation/points?via=163934,368304|240343,514988&key=yTnaPMi.68tqUHHAqw68XJs2Lzapgxn2Ogubi52E</span>
+
+{
+  "results": [
+    {
+      "elevation": 28.680999755859375, 
+      "rdx": 163934, 
+      "rdy": 368304
+    }, 
+    {
+      "elevation": 10.375268936157227, 
+      "rdx": 240343, 
+      "rdy": 514988
+    }
+  ], 
+  "metadata": {
+    "product": "ahn_dsm_5m", 
+    "resolution": 5
+  }, 
+  "status": "OK"
+}</p>
+</div>
+</div>
+
+<div class="section3">
+	<h3>Example API Call using Python</h3>
+
+<div class="code-box example">
+<p class="code-text2 response"><span class="code-color">>>></span> import requests
+<span class="code-color">>>></span>
+<span class="code-color">>>></span> api_url = "https://demapi.com/api/v1/elevation/point?via=240343,514988&key=yTnaPMi.68tqUHHAqw68XJs2Lzapgxn2Ogubi52E"
+<span class="code-color">>>></span> response = requests.get(api_url)
+<span class="code-color">>>></span>
+<span class="code-color">>>></span> print(response.json())
+
+{'results': [{'elevation': 10.375268936157227, 'rdx': 240343, 'rdy': 514988}], 'metadata': {'product': 'ahn_dsm_5m', 'resolution': 5}, 'status': 'OK'}</p>
+</div>
+</div>
+
+</div>
+
+<p style="text-align: center; color: #999; margin-top: -4rem; margin-bottom: 3rem;">© 2021 demapi.com</p>
+
+{% endblock %}
+
+
+
+
+

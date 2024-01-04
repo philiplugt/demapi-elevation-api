@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block user %}
+
+<nav class="header-item nav">
+	<a href="{{ url_for('show_login') }}" role="link" aria-label="#" class="nav-btn nav-btn-log">Log In</a>
+	<a href="{{ url_for('show_signup') }}" role="link" aria-label="#" class="nav-btn nav-btn-sign">Sign Up</a>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="landing">
+	<div class="container-landing">
+		
+		<div class="container-landing-box-text">
+			<h2>Demapi makes DEMs easy</h2>
+			<h5>Give us a set of coordinates, and we will get you the location’s elevation. One API call is all you need.</h5>
+			<a href="{{ url_for('show_signup') }}" role="link" aria-label="#" class="nav-btn nav-btn-sign">Get started</a>
+		</div>
+		<div class="container-landing-box container-landing-box-code">
+
+			<p class="response code-text"><span class="blue">GET</span>
+
+https://demapi.com/api/v1/elevation/point?via=160237,416055&crs=rd&key=YOUR_KEY</p>
+			<p class="response code-text"><span class="blue">RESPONSE</span>
+
+{ 
+  "results": [ {
+       "elevation": <span class="blue">5.3109</span>, 
+       "rdx": <span class="blue">160237</span>, 
+       "rdy": <span class="blue">416055</span>
+  } ], 
+  "metadata": {
+       "product": "<span class="blue">ahn_dsm_5m</span>", 
+       "resolution": <span class="blue">5</span> 
+  }, 
+  "status": "<span class="blue">OK</span>"
+}
+</p>
+		</div>
+
+	</div>
+
+	<h2 class="section-head section-heado" id="about">About</h2>
+	<div class="section">
+
+		<div class="section-box">
+			<h4>What is Demapi?</h4>
+			<p>Demapi is an elevation API capable of quickly parsing coordinate queries to provide you with elevation.</p>
+
+		</div>
+		<div class="section-box">
+			<h4>Why choose Demapi?</h4>
+			<p>	Our API gives you the power to pick and choose. Therefore, we allow you to use coordinates from a reference system you are comfortable with, choose the dataset you need ranging from 90m to 50cm resolution, query up to 500 points at a time, and choose between points, line, and polygons.</p>
+
+		</div>
+	</div>
+	<div class="section">
+
+		<div class="section-box">
+			<h4>What is Demapi's coverage?</h4>
+			<p>We are currently supporting elevation queries for the Netherlands. We hope to add more countries and regions in the future.</p>
+
+		</div>
+		<div class="section-box">
+			<h4>How can I get in contact?</h4>
+			<p>The Demapi service is run by LugtAarde a small consulting business in the Netherlands focussed on geospatial consultations. You can visit us at <a href="https://lugtaarde.com">lugtaarde.com</a> or send us an email to <a href="mailto:hello@lugtaarde.com">hello@lugtaarde.com</a>
+		</div>
+	</div>
+
+	<h2 class="section-head section-heado" id="coverage">Coverage</h2>
+	<div class="section-1">
+
+		<div class="section-1-text">
+			<h3>Your region not available yet? <br><a href="mailto:hello@lugtaarde.com">Let us know!</a></h3>
+		</div>
+		<img class="landing-img" src="static/img/coverage3.png">
+
+	</div>
+</div>
+
+{% include "information/pricing.html" %}
+
+<p style="text-align: center; color: #999; margin-top: -4rem; margin-bottom: 3rem;">© 2021 demapi.com</p>
+
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block user %}
+
+<nav class="header-item nav">
+	<a href="{{ url_for('show_login') }}" role="link" aria-label="#" class="nav-btn nav-btn-log">Log In</a>
+	<a href="{{ url_for('show_signup') }}" role="link" aria-label="#" class="nav-btn nav-btn-sign">Sign Up</a>
+</nav>
+
+{% endblock %}
+
+{% block content %}
+
+<main>
+	<div class="container-login">
+		<h4>Log in to your account</h4>
+		<form class="form-login" action="{{ url_for('do_login') }}" method="post">
+			<label>Email Address</label>
+			<input  type="email" name="email">
+
+			<label>Password</label>
+			<input  type="password" name="password">
+
+			<button class="nav-btn nav-btn-sign log-btn">Log In</button>
+		</form>
+		<p>Don't have an account yet? <a href="{{ url_for('show_signup') }}">Sign up</a></p>
+	</div>
+</main>
+
+{% endblock %}
